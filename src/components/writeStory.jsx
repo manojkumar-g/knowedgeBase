@@ -1,11 +1,13 @@
 import React from 'react'
 import TextArea from './textArea.jsx'
+import { connect } from 'react-redux'
 
-export default class Story extends React.Component {
+class Story extends React.Component {
   constructor(props) {
     super(props)
   }
   render(){
+    console.log(this.props);
     return(
       <section className = 'writeStory'>
         <article className = 'writer'>
@@ -13,10 +15,20 @@ export default class Story extends React.Component {
           <span> User Name</span>
         </article>
         <article className="story">
-          <TextArea type = 'title'/>
+          {
+            this.props.data.map(
+              (props) => <TextArea {...props} key = {'area'+props.id}/>
+            )
+          }
+
         </article>
 
       </section>
     )
   }
 }
+
+export default connect(
+  ({editorData}) =>({...editorData}),
+  {}
+)(Story)
