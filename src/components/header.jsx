@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router'
 
 const Header = () => <section className = 'container'>
                           <article className = 'title'>
@@ -8,7 +9,7 @@ const Header = () => <section className = 'container'>
                             <ul>
                               <li><i className="fa fa-user-circle" aria-hidden="true"></i></li>
                               <li><i className="fa fa-search" aria-hidden="true"></i></li>
-                              <li className = 'write'><i className="fa fa-pencil-square-o" aria-hidden="true"></i><span>Write a story</span></li>
+                              <li ><Link to = '/new' className = 'write'><i className="fa fa-pencil-square-o" aria-hidden="true"></i><span>Write a story</span></Link></li>
 
                             </ul>
                           </article>

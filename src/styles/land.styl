@@ -1,6 +1,9 @@
 @import "jeet"
 @import "rupture"
 @import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Open+Sans|Ubuntu')
+*
+  box-sizing: border-box
+  position: relative
 
 .head
   column(1)
@@ -27,8 +30,28 @@
         float: right
       .write
         color green
+        text-decoration: none
 .content
   column(1)
   .container
-    center(1020px)
+    center(960px)
     margin-top 0
+.text
+.hiddenDiv
+  font-family: 'Ubuntu'
+  font-size: 1.5em
+  bold()
+  column(1)
+.text
+  overflow: hidden
+  border none
+  resize none
+  outline: none
+.hiddenDiv
+  column(1)
+  white-space: pre-wrap
+  word-wrap: break-word
+  overflow-wrap: break-word
+  position absolute
+  margin-left -9999px
+  visibility hidden

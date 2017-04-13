@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "./node_modules/babel-cli/bin/babel-node.js server.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +20,13 @@
   "dependencies": {
     "autoprefixer-stylus": "^0.13.0",
     "axis": "^1.0.0",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "body-parser": "^1.17.1",
     "css-loader": "^0.26.1",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
