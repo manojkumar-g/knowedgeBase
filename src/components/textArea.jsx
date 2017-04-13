@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Story extends React.Component {
+export default class TextArea extends React.Component {
   constructor(props) {
     super(props)
     this.state = {value : '',height:'1.5em'}
@@ -13,26 +13,33 @@ export default class Story extends React.Component {
   }
   render(){
     return(
-      <div>
-        <pre className = 'hiddenDiv'
-          ref={(input) => { this.textInput = input }}
-          >
-            Hello
-        {this.state.value}
-      </pre>
-        <textarea name=""
-          placeholder = 'Write here'
-          onKeyUp = {this.onKeyUp}
-          style = {{height:this.state.height}}
-          className ="text"
-          autoFocus
-          value ={this.state.value}
-          onChange = {this.onChange}
-          >
+      <section className = 'storyPart'>
+        <section className="storymenu">
+            {'<>'}
+        </section>
+        <section className="storyData">
+          <pre className = 'hiddenDiv quote'
+            ref={(input) => { this.textInput = input }}
+            >
+              Hello
+          {this.state.value}
+        </pre>
+          <textarea name=""
+            placeholder = 'Write here'
+            onKeyUp = {this.onKeyUp}
+            style = {{height:this.state.height}}
+            className ="text quote"
+            autoFocus
+            value ={this.state.value}
+            onChange = {this.onChange}
+            >
 
-        </textarea>
+          </textarea>
 
-      </div>
+        </section>
+
+
+      </section>
 
     )
   }

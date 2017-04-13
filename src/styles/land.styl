@@ -1,6 +1,6 @@
 @import "jeet"
 @import "rupture"
-@import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Open+Sans|Ubuntu')
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Open+Sans|Ubuntu|Macondo')
 *
   box-sizing: border-box
   position: relative
@@ -36,11 +36,30 @@
   .container
     center(960px)
     margin-top 0
+.writeStory
+  column(1)
+  font-family: Ubuntu
+.writer
+  column(11/12,$offset:1/12)
+  margin-top: 5vh
+  i
+    font-size: 3em
+  span
+    margin-top: 0px
+    font-size: 2em
+.story
+  column(1)
+  padding-top 50px
+.storyPart
+  column(1)
+.storymenu
+  column(1/12)
+
+.storyData
+  column(11/12)
 .text
 .hiddenDiv
   font-family: 'Ubuntu'
-  font-size: 1.5em
-  bold()
   column(1)
 .text
   overflow: hidden
@@ -55,14 +74,21 @@
   position absolute
   margin-left -9999px
   visibility hidden
-.writeStory
-  column(1)
-  font-family: Ubuntu
-.writer
-  column(11/12,$offset:1/12)
-  margin-top: 5vh
-  i
-    font-size: 3em
-  span
-    margin-top: 0px
-    font-size: 2em
+.titleText
+  font-size: 1.5em
+  bold()
+.subTitle
+  font-size: 1.3em
+  bold()
+.paragraph
+  font-family Open Sans
+  fs: 1.3em
+  normal()
+.quote
+  blockquote blue
+  fs: 1.5em
+  font-family Macondo
+  italic()
+.code
+  fs: 1.3em
+  font-family Consolas
