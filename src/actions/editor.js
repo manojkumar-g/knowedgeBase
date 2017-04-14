@@ -1,6 +1,6 @@
-export const addNewPart = (position) => ({
+export const addNewPart = (id) => ({
   type : 'ADD_NEW_PART',
-  position
+  id
 })
 
 export const changeContent =(id,newValue) => ({

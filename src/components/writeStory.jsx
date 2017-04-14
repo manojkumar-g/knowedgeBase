@@ -8,7 +8,6 @@ class Story extends React.Component {
     super(props)
   }
   render(){
-    console.log(this.props);
     return(
       <section className = 'writeStory'>
         <article className = 'writer'>
@@ -23,6 +22,8 @@ class Story extends React.Component {
                 {...props}
                 onChange = {this.props.changeContent}
                 key = {'area'+props.id}
+                addNew = {this.props.addNewPart}
+                remove = {this.props.removePart}
               />
             )
           }
