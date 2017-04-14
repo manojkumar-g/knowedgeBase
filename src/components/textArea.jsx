@@ -7,6 +7,7 @@ export default class TextArea extends React.Component {
   }
   onChange = (e) =>{
     this.setState({value:e.target.value})
+    this.props.onChange(this.props.id,e.target.value)
   }
   onKeyUp = () => {
     this.setState({height:this.textInput.clientHeight})
@@ -25,7 +26,7 @@ export default class TextArea extends React.Component {
             ref={(input) => { this.textInput = input }}
             >
               Hello
-          {this.state.value}
+          {this.props.data}
         </pre>
           <textarea name=""
             // onFocus = {this.onFoc}
@@ -34,7 +35,7 @@ export default class TextArea extends React.Component {
             style = {{height:this.state.height}}
             className ={"text "+this.props.type}
             autoFocus
-            value ={this.state.value}
+            value ={this.props.data}
             onChange = {this.onChange}
             >
 

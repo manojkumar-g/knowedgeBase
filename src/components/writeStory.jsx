@@ -1,6 +1,7 @@
 import React from 'react'
-import TextArea from './textArea.jsx'
 import { connect } from 'react-redux'
+import TextArea from './textArea.jsx'
+import * as actions from '../actions/editor'
 
 class Story extends React.Component {
   constructor(props) {
@@ -17,7 +18,12 @@ class Story extends React.Component {
         <article className="story">
           {
             this.props.data.map(
-              (props) => <TextArea {...props} key = {'area'+props.id}/>
+              (props) =>
+              <TextArea
+                {...props}
+                onChange = {this.props.changeContent}
+                key = {'area'+props.id}
+              />
             )
           }
 
@@ -30,5 +36,5 @@ class Story extends React.Component {
 
 export default connect(
   ({editorData}) =>({...editorData}),
-  {}
+  {...actions}
 )(Story)
