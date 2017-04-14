@@ -5,13 +5,19 @@ const initialState = {
   data:[
     {id : 0,type:'titleText',data:''},
     {id : 1,type:'paragraph',data:''}
-  ]
-
+  ],
+  focused:0
 }
 const reducer = (state = initialState,action) =>{
   let {data} = state
   let ind = findIndex(data,(d) => d.id == action.id)
   switch (action.type) {
+    case 'ADD_FOCUS':
+        return{
+          ...state,
+          focused:action.id
+        }
+
     case 'EDIT_CONTENT':
       return{
         ...state,
@@ -35,6 +41,7 @@ const reducer = (state = initialState,action) =>{
       return state
     return{
       ...state,
+      focused:ind >0 ? data[ind-1].id : 0,
       data:[
         ...slice(data,0,ind),
         ...slice(data,ind+1,data.length)

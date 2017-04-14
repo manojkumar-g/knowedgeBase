@@ -8,6 +8,7 @@ export default class TextArea extends React.Component {
   }
   componentDidMount(){
     this.setState({count:2})
+
   }
   onChange = (e) =>{
     let {value} = e.target
@@ -37,10 +38,19 @@ export default class TextArea extends React.Component {
 
 
   }
+  componentWillReceiveProps({id,focus}){
+    if(id==focus){
+      console.log('focusing on',id);
+      this.area.focus()
+    }
+
+  }
   onFoc = () => {
-    console.log(this.props.id);
+    this.props.addFocus(this.props.id)
   }
   render(){
+
+
     return(
       <section className = 'storyPart'>
         <section className="storymenu">
@@ -54,7 +64,8 @@ export default class TextArea extends React.Component {
           {this.props.data}
         </pre>
           <textarea name=""
-            // onFocus = {this.onFoc}
+            ref ={(input) => {this.area = input}}
+            onFocus = {this.onFoc}
             placeholder = {this.props.type == 'titleText' ? 'Title' : 'Write your Story...'}
             onKeyUp = {this.onKeyUp}
             style = {{height:this.state.height}}

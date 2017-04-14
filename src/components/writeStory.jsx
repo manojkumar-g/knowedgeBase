@@ -24,6 +24,8 @@ class Story extends React.Component {
                 key = {'area'+props.id}
                 addNew = {this.props.addNewPart}
                 remove = {this.props.removePart}
+                focus = {this.props.focused}
+                addFocus = {this.props.focus}
               />
             )
           }

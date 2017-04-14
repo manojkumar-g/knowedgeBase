@@ -3,6 +3,11 @@ export const addNewPart = (id) => ({
   id
 })
 
+export const focus = (id) => ({
+  type : 'ADD_FOCUS',
+  id
+})
+
 export const changeContent =(id,newValue) => ({
   type : 'EDIT_CONTENT',
   id,
