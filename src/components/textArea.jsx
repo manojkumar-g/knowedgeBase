@@ -78,6 +78,7 @@ export default class TextArea extends React.Component {
                     >
                     <li
                       onClick = {() => {this.changeType('quote')}}
+                      className = 'activeStyle'
                       >
                       <i className="fa fa-quote-right"
                         aria-hidden="true">
