@@ -26,6 +26,7 @@ class Story extends React.Component {
                 remove = {this.props.removePart}
                 focus = {this.props.focused}
                 addFocus = {this.props.focus}
+                changeType = {this.props.changePartType}
               />
             )
           }

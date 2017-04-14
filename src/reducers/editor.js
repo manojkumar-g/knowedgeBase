@@ -27,6 +27,15 @@ const reducer = (state = initialState,action) =>{
           ...slice(data,ind+1,data.length)
         ]
       }
+    case 'CHANGE_PART_TYPE':
+      return{
+        ...state,
+        data:[
+          ...slice(data,0,ind),
+          {...data[ind],type:action.newType},
+          ...slice(data,ind+1,data.length)
+        ]
+      }
     case 'ADD_NEW_PART':
       return{
         ...state,

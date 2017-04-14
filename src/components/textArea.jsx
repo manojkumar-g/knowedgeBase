@@ -1,10 +1,11 @@
 import React from 'react'
 import endsWith from 'lodash/endsWith'
+import { Motion, spring, presets } from 'react-motion'
 
 export default class TextArea extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {height:'1.5em',count:1}
+    this.state = {height:'1.5em',count:1,show:false}
   }
   componentDidMount(){
     this.setState({count:2})
@@ -40,7 +41,6 @@ export default class TextArea extends React.Component {
   }
   componentWillReceiveProps({id,focus}){
     if(id==focus){
-      console.log('focusing on',id);
       this.area.focus()
     }
 
@@ -48,13 +48,85 @@ export default class TextArea extends React.Component {
   onFoc = () => {
     this.props.addFocus(this.props.id)
   }
+  toogleMenu = () =>{
+    this.setState({show:!this.state.show})
+  }
+  changeType = (newType) =>{
+    this.props.changeType(this.props.id,newType)
+    this.setState({show:false})
+  }
   render(){
-
-
     return(
       <section className = 'storyPart'>
-        <section className="storymenu">
-            {'<>'}
+        <section
+          className="storymenu"
+          style ={{opacity:this.props.id ==this.props.focus ? 1:0}}>
+          <Motion
+             style = {{
+               w: spring(this.state.show ? 350 : 0,presets.gentle),
+               op : spring(this.state.show ? 0.9:0,presets.gentle)
+             }}
+             >
+             {
+               ({w,op}) =>
+                  <ul className = 'tooltip'
+                     style = {{
+                            width: w+'px',
+                            opacity : op,
+                            display: this.state.show ? 'block' : 'none'
+                          }}
+                    >
+                    <li
+                      onClick = {() => {this.changeType('quote')}}
+                      >
+                      <i className="fa fa-quote-right"
+                        aria-hidden="true">
+                        </i>
+                    </li>
+                    <li
+                      onClick = {() => {this.changeType('titleText')}}
+                      >
+                      <i className="fa fa-header"
+                        aria-hidden="true">
+                        </i>
+                    </li>
+                    <li
+                      onClick = {() => {this.changeType('subTitle')}}
+                      >
+
+                      <i className="fa fa-text-height"
+                        aria-hidden="true">
+                      </i>
+                    </li>
+                    <li>
+                      <i
+                        onClick = {() => {this.changeType('paragraph')}}
+                        style ={{textDecoration:'italic'}}>
+                        <span>
+                          P
+                        </span>
+                      </i>
+                    </li>
+                    <li>
+                      <i
+                        onClick = {() => {this.changeType('code')}}
+                        style ={{textDecoration:'italic'}}>
+                        <span>
+                          {'<>'}
+                        </span>
+                      </i>
+                    </li>
+
+                  </ul>
+                }
+          </Motion>
+            <i
+              className= {this.state.show?"fa fa-cog act":"fa fa-cog"}
+              aria-hidden="true"
+              onClick = {this.toogleMenu}
+              >
+
+            </i>
         </section>
         <section className="storyData">
           <pre className = {'hiddenDiv '+this.props.type}
@@ -66,7 +138,7 @@ export default class TextArea extends React.Component {
           <textarea name=""
             ref ={(input) => {this.area = input}}
             onFocus = {this.onFoc}
-            placeholder = {this.props.type == 'titleText' ? 'Title' : 'Write your Story...'}
+            placeholder = {this.props.type == 'titleText' ? 'Title' : 'Write your '+this.props.type+'...'}
             onKeyUp = {this.onKeyUp}
             style = {{height:this.state.height}}
             className ={"text "+this.props.type}

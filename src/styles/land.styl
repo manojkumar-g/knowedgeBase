@@ -52,10 +52,17 @@
   padding-top 50px
 .storyPart
   column(1)
-  margin-bottom 30px
+  margin-bottom 20px
 .storymenu
   column(1/12)
-
+  font-size: 1.5em
+  color: maroon
+  padding: 15px
+  i
+    cursor: pointer
+    transition: all .5s
+.act
+    transform: rotateZ(90deg)
 .storyData
   column(11/12)
 .text
@@ -77,6 +84,7 @@
   visibility hidden
 .titleText
   font-size: 2em
+  color navy
   bold()
 .subTitle
   font-size: 1.3em
@@ -94,3 +102,22 @@
 .code
   fs: 1.3em
   font-family Consolas
+.tooltip
+  inline-list()
+  position: absolute
+  height: 1.5em
+  z-index: 1
+  transform:translate(25px,-25px)
+  padding .2em
+  li
+    cursor: pointer
+    text-align: center
+    width: 50px
+    height: 50px
+    rounded()
+    background: gray
+    color maroon
+    border 1px solid white
+    font-size: .7em
+    margin 0px 5px
+    padding:15px
