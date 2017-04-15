@@ -68,16 +68,15 @@
 .hiddenDiv
   font-family: 'Ubuntu'
   column(1)
+  word-wrap: break-word
+  overflow-wrap: break-word
+  white-space: pre-wrap
 .text
   overflow: hidden
   border none
   resize none
   outline: none
 .hiddenDiv
-  column(1)
-  white-space: pre-wrap
-  word-wrap: break-word
-  overflow-wrap: break-word
   position absolute
   margin-left -9999px
   visibility hidden
@@ -86,16 +85,17 @@
   color navy
   bold()
 .subTitle
-  font-size: 1.3em
+  font-size: 1.7em
   bold()
 .paragraph
   font-family Open Sans
   fs: 1.3em
   normal()
+  margin-bottom 20px
 .quote
-  blockquote blue
-  column(1)
-  fs: 1.5em
+  border-left 3px solid blue
+  padding-left 20px
+  fs: 1.3em
   font-family Macondo
   italic()
 .code
