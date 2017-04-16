@@ -8,7 +8,7 @@ var config = require('./webpack.config')
 var app = express()
 import conf from './config'
 import connection from './src/api/db'
-
+import storyRoutes from './src/api/routes/stories.js'
 import authRoutes from './src/api/routes/auth.js'
 import passportConfig from './src/api/config/passport';
 
@@ -31,6 +31,7 @@ app.use(passport.initialize())
 passportConfig(passport)
 authRoutes(app,passport)
 
+app.use('/api',storyRoutes);
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'))
 })

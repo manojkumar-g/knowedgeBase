@@ -3,7 +3,7 @@ const reducer = (
                   isLoggedIn: false,
                   messages: '',
                   requestForRegister: false,
-                  requestForLogin: true,
+                  requestForLogin: false,
                   firstName: '',
                   email:'',
                   showModal :false

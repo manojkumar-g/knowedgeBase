@@ -4,10 +4,13 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 var Story = mongoose.Schema({
   data:Array,
+  title:String,
   genre   : String,
+  name    : String,
   author  : String,
   comments: Array,
-  likedBy : Array
+  likedBy : Array,
+  time:String
 });
 
 export default mongoose.model('stories',Story);

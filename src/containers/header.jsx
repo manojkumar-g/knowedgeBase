@@ -3,6 +3,7 @@ import {Link,browserHistory} from 'react-router'
 import { connect } from 'react-redux'
 import * as Actions from '../actions/auth'
 import Modal from '../components/loginModal.jsx'
+import {publishArticle} from '../actions/editor'
 
 class Header extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Header extends React.Component {
     }
   }
   publish =() =>{
-    console.log('publish');
+    this.props.publishArticle()
   }
   render(){
     let path = browserHistory.getCurrentLocation().pathname
@@ -59,5 +60,5 @@ class Header extends React.Component {
 
 export default connect(
   ({userData}) => ({...userData}),
-  {...Actions}
+  {...Actions,publishArticle}
 )(Header)

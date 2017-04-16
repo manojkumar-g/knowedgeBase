@@ -1,13 +1,16 @@
 import findIndex from 'lodash/findIndex'
 import slice from 'lodash/slice'
 
+
 const initialState = {
   data:[
     {id : 0,type:'titleText',data:''},
     {id : 1,type:'paragraph',data:''}
   ],
   focused:0,
-  type:''
+  genre:'EDUCATION',
+  requestPublish: false,
+  successPublish:false
 }
 const reducer = (state = initialState,action) =>{
   let {data} = state
@@ -57,6 +60,27 @@ const reducer = (state = initialState,action) =>{
         ...slice(data,ind+1,data.length)
       ]
     }
+    case 'SET_GENRE':
+      return{
+        ...state,
+        genre:action.genre
+      }
+    case 'REQUEST_PUBLISH':
+      return{
+        ...state,
+        requestPublish:true
+      }
+    case 'SUCCESS_PUBLISH':
+      return{
+        ...initialState,
+        successPublish:true
+      }
+    case 'FAILURE_PUBLISH':
+      return{
+        ...state,
+        requestPublish:false,
+        successPublish:false
+        }
     default:
       return state
 
