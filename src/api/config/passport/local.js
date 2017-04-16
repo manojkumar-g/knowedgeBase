@@ -56,7 +56,8 @@ export const localLogin = new LocalStrategy(
                                 };
                 let token = jwt.sign(payload,config.jwtSecret);
                 let data = {
-                  name : user.firstName
+                  name : user.firstName+' '+user.lastName,
+                  email:user.email
                 }
                 return done(null,token,data);
               }

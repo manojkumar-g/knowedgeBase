@@ -24,3 +24,8 @@ export const removePart = (id) =>({
   type:'REMOVE_PART',
   id
 })
+
+export const publishArticle = (genre,email) => ({
+  type:'PUBLISH_ARTICLE',
+  email
+})

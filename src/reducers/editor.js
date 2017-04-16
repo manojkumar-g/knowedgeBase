@@ -6,7 +6,8 @@ const initialState = {
     {id : 0,type:'titleText',data:''},
     {id : 1,type:'paragraph',data:''}
   ],
-  focused:0
+  focused:0,
+  type:''
 }
 const reducer = (state = initialState,action) =>{
   let {data} = state

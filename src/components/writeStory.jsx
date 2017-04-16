@@ -12,7 +12,7 @@ class Story extends React.Component {
       <section className = 'writeStory'>
         <article className = 'writer'>
           <i className="fa fa-user-circle" aria-hidden="true"></i>
-          <span> User Name</span>
+          <span> {this.props.name}</span>
         </article>
         <article className="story">
           {
@@ -39,6 +39,6 @@ class Story extends React.Component {
 }
 
 export default connect(
-  ({editorData}) =>({...editorData}),
+  ({editorData,userData}) =>({...editorData,name:userData.firstName}),
   {...actions}
 )(Story)

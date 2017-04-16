@@ -1,6 +1,6 @@
 import React from 'react';
 import css from '../styles/land.styl'
-import Header from '../components/header.jsx'
+import Header from './header.jsx'
 export default class App extends React.Component{
 
   render(){
