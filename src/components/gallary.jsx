@@ -4,6 +4,7 @@ import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import indexOf from 'lodash/indexOf'
 import pull from 'lodash/pull'
+import findIndex from 'lodash/findIndex'
 
 class Gallary extends React.Component {
   constructor(props) {
@@ -14,7 +15,10 @@ class Gallary extends React.Component {
     axios.get('/api/allPosts')
         .then(
           (res) =>
-             this.setState({posts:res.data})
+             this.setState({
+               posts:res.data})
+        ).catch(
+          err => console.log(err)
         )
   }
   read(id){
@@ -26,15 +30,23 @@ class Gallary extends React.Component {
     let {posts} = this.state
     if(posts.length <= 0)
       return
+    let ind = findIndex(posts,(o) => o._id === id )
+    if(ind>=0){
+      let {likedBy} = posts[ind]
+      console.log(posts[ind]);
+      indexOf(likedBy,this.props.email) >=0 ?
+        axios.put('/api/disliked',{email:this.props.email,id}) :
+        axios.put('/api/liked',{email:this.props.email,id})
+    }
     this.setState({
       posts: posts.map(
         post => {
           return (post._id != id) ? post: this.filter(post)
-
-
         }
       )
     })
+
+
 
   }
   filter(post){

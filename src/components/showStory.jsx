@@ -32,6 +32,8 @@ class Story extends React.Component{
     this.setState({comment:value})
   }
   sendComment = () =>{
+    if(this.state.comment.length == 0 )
+      return
     let cmt = {
       author:this.props.email,
       data:this.state.comment
@@ -107,7 +109,7 @@ class Story extends React.Component{
             </header>
             <div className ='txtara'>
               {
-                this.props.isLoggedIn ?
+                this.props.isLoggedIn  ?
                 <div className = 'txtaracont'>
                   <textarea className = '.txtara'
                     style = {{
@@ -119,12 +121,16 @@ class Story extends React.Component{
                     value ={this.state.comment}
                     onChange = {this.onChange}
                   />
-                  <button
-                    onClick = {this.sendComment}
-                    style = {{
-                      opacity:this.state.write?1:0,
-                    }}
-                    >Comment</button>
+                  {
+                    this.state.write ?
+                    <button
+                      onClick = {this.sendComment}
+                      style = {{
+                        opacity:this.state.write?1:0,
+                      }}
+                      >Comment</button>:''
+                  }
+
               </div>
                 :''
               }

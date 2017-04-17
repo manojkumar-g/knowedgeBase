@@ -61,9 +61,30 @@ router.put("/updatecomments/:id",function (req,res) {
         if(err)
           return res.status(500).json({err,success:true})
         return res.status(200).json({success:true})
-    }
-);
+    })
+})
 
-});
+router.put("/liked",function (req,res) {
+  var id = req.body.id;
+  Story.findByIdAndUpdate(
+    id,
+    {$push: {"likedBy": req.body.email}},
+    {safe: true, upsert: true, new : true},
+    function(err, model) {
+        if(err)
+          return res.status(500).json({err,success:true})
+        return res.status(200).json({success:true})
+    })
+})
+
+router.put("/disliked",function (req,res) {
+  Story.update( {_id: req.body.id}, { $pull: { likedBy: req.body.email }
+      }, function(err, model){
+        if(err)
+          return res.status(500).json({err,success:true})
+        console.log('Hello');
+        return res.status(200).json({success:true})
+      })
+})
 
 export default router
