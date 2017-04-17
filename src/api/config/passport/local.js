@@ -51,15 +51,16 @@ export const localLogin = new LocalStrategy(
               if(err)
                 return done(err);
               if(isMatch) {
-                const payload = {
-                                  sub: user._id
-                                };
-                let token = jwt.sign(payload,config.jwtSecret);
+
                 let data = {
                   name : user.firstName+' '+user.lastName,
                   email:user.email
                 }
-                return done(null,token,data);
+                const payload = {
+                                  data
+                                };
+                let token = jwt.sign(payload,config.jwtSecret);
+                return done(null,token);
               }
               else{
                 const error = new Error('Invalid Credentials');

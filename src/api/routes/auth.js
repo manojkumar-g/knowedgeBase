@@ -32,15 +32,14 @@ app.post('/login',
     (req,res,next) =>
     passport.authenticate('local-login',
       {session : false},
-      (err,token,userData) => {
+      (err,token) => {
         if (err) {
           return res.status(400).json({message : err.message,success:false})
         }
         return res.status(200).json({
           success : true,
-          userData ,
           token,
-          message:'Successfully Logged in as '+userData.name,
+          message:'Successfully Logged in',
         })
 
       }

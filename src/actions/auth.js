@@ -1,6 +1,8 @@
 import axios from 'axios'
 import setAuthorizationToken from '../utils/setAuthorizationToken.js'
 import fetch from 'isomorphic-fetch';
+import jwtDecode from 'jwt-decode'
+import isEmpty from 'lodash/isEmpty'
 
 export const requestForRegistration = (data) =>
     dispatch =>{
@@ -33,10 +35,11 @@ export const requestForLogin = (data) =>
         return axios.post('/login',data)
              .then(response => {
                let token = response.data.token;
-               sessionStorage.setItem('accessToken',token);
+               localStorage.setItem('token',token);
+               let userData = jwtDecode(token).data
                setAuthorizationToken(token)
                dispatch(toggleModal())
-               response.status === 200 ? dispatch(successLogin(response.data.userData.name,response.data.userData.email)) : dispatch(failureLogin(response.data.message))
+               response.status === 200 ? dispatch(successLogin(userData.name,userData.email)) : dispatch(failureLogin(response.data.message))
              })
              .catch(
                ({response:{data}}) => {
@@ -44,6 +47,15 @@ export const requestForLogin = (data) =>
                }
              )
     }
+export const setFromToken = (token) =>
+  dispatch => {
+    let userData = jwtDecode(token).data
+    setAuthorizationToken(token)
+    if(!isEmpty(userData))
+      return dispatch(successLogin(userData.name,userData.email))
+
+    return dispatch(failureLogin(response.data.message))
+  }
 
 const successLogin = (name,email) => ({
     type : 'SUCCESS_LOGIN',
@@ -57,7 +69,13 @@ const failureLogin = (message) => ({
     type : 'FAILURE_LOGIN',
     message
 });
-export const reqLogOut = () => ({
+export const reqLogOut = () =>
+  dispatch => {
+    setAuthorizationToken()
+    localStorage.removeItem('token')
+    dispatch(LogOut())
+  }
+const LogOut = () => ({
     type : 'REQUEST_LOGOUT'
 });
 
