@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import {browserHistory} from 'react-router'
+import {connect} from 'react-redux'
+import indexOf from 'lodash/indexOf'
+import pull from 'lodash/pull'
 
-export default class Gallary extends React.Component {
+class Gallary extends React.Component {
   constructor(props) {
     super(props)
     this.state = {posts:[]}
@@ -16,6 +19,36 @@ export default class Gallary extends React.Component {
   }
   read(id){
     browserHistory.push('/read/'+id)
+  }
+  toggleLike = (id) => {
+    if(!this.props.isLoggedIn)
+      return
+    let {posts} = this.state
+    if(posts.length <= 0)
+      return
+    this.setState({
+      posts: posts.map(
+        post => {
+          return (post._id != id) ? post: this.filter(post)
+
+
+        }
+      )
+    })
+
+  }
+  filter(post){
+    let {likedBy} = post
+    let newLike = []
+    if(indexOf(likedBy,this.props.email) < 0)
+      newLike = [...likedBy,this.props.email]
+    else {
+      newLike = pull(likedBy,this.props.email)
+    }
+    return {
+      ...post,
+      likedBy:newLike
+    }
   }
   render(){
     return(
@@ -41,7 +74,16 @@ export default class Gallary extends React.Component {
                         </div>
                         <div className="footer">
                           <div className="like">
-                            <i className="fa fa-heart-o" aria-hidden="true"></i>
+                            {
+                              indexOf(post.likedBy,this.props.email) >= 0 ?
+                              <i
+                                onClick = { () => this.toggleLike(post._id)}
+                                className="fa fa-heart" aria-hidden="true">
+                              </i>:
+                              <i
+                                onClick = {() => this.toggleLike(post._id)}
+                                className="fa fa-heart-o" aria-hidden="true"></i>
+                            }
                             {" "+post.likedBy.length}
                           </div>
                           <div className="comment">
@@ -60,3 +102,9 @@ export default class Gallary extends React.Component {
     )
   }
 }
+export default connect(
+  ({userData}) => ({
+    isLoggedIn:userData.isLoggedIn,
+    email:userData.email
+  }),{}
+)(Gallary)
