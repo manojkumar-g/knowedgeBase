@@ -54,6 +54,8 @@ export default class Modal extends React.Component {
   }
   signUp = () => {
     this.props.signUp(this.state.signUp)
+    if(this.props.isLoggedIn)
+      this.setState({slideIndex:0})
   }
   render(){
     const customContentStyle = {

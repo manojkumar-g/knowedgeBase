@@ -10,6 +10,7 @@ import NewStory from './components/writeStory.jsx'
 import store from './configureStore'
 import Gallary from './components/gallary.jsx'
 import ShowStory from './components/showStory.jsx'
+import requireAuth from './utils/requireAuth.jsx'
 
 injectTapEventPlugin()
 
@@ -19,7 +20,7 @@ render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component = {Gallary}/>
-            <Route path = '/new' component = {NewStory}/>
+            <Route path = '/new' component = {requireAuth(NewStory)}/>
             <Route path = '/read/:id' component = {ShowStory}/>
         </Route>
     </Router>
