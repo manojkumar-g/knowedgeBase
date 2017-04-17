@@ -51,4 +51,19 @@ router.get("/getstory/:storyid",function (req,res) {
       });
 });
 
+router.put("/updatecomments/:id",function (req,res) {
+  var id = req.params.id;
+  Story.findByIdAndUpdate(
+    id,
+    {$push: {"comments": req.body}},
+    {safe: true, upsert: true, new : true},
+    function(err, model) {
+        if(err)
+          return res.status(500).json({err,success:true})
+        return res.status(200).json({success:true})
+    }
+);
+
+});
+
 export default router

@@ -6,7 +6,7 @@ import {toggleModal} from '../actions/auth.js'
 class Story extends React.Component{
   constructor(props) {
     super(props)
-    this.state = {post:{data:[]},write:false,comment:''}
+    this.state = {post:{data:[],comments:[]},write:false,comment:''}
   }
   componentDidMount(){
     if(this.props.params.id.length){
@@ -32,15 +32,36 @@ class Story extends React.Component{
     this.setState({comment:value})
   }
   sendComment = () =>{
-    console.log({
+    let cmt = {
       author:this.props.email,
-      data:this.state.comment,
-      id:this.state.post._id
-    });
+      data:this.state.comment
+    }
+    let url = '/api/updatecomments/'+ this.state.post._id
+    let {post} = this.state
     this.setState({
+      post:{
+        ...post,
+        comments:[
+          cmt,
+          ...post.comments
+        ]
+      },
       comment:'',
       write:false
     })
+    axios.put(url,cmt)
+          .then(
+            res => {
+              console.log(res);
+            }
+          ).
+          catch(
+            err => {
+              this.setState({
+                post
+              })
+            }
+          )
   }
   render(){
     return(
@@ -108,7 +129,22 @@ class Story extends React.Component{
                 :''
               }
             </div>
+
           </div>
+          {
+            this.state.post.comments.map(
+              (comment,i) =>
+              <div className = 'cmttile' key ={'comment'+i}>
+                <div className ='comAvatar'>
+                    <i className="fa fa-user-circle" aria-hidden="true"></i>
+                </div>
+                <div className ='comtxt'>
+                      <span style={{color:'green'}}>{comment.author+''}</span>
+                </div>
+                {comment.data}
+              </div>
+            )
+          }
         </article>
       </section>
     )
