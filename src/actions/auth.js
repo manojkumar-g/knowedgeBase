@@ -49,12 +49,19 @@ export const requestForLogin = (data) =>
     }
 export const setFromToken = (token) =>
   dispatch => {
-    let userData = jwtDecode(token).data
-    setAuthorizationToken(token)
-    if(!isEmpty(userData))
-      return dispatch(successLogin(userData.name,userData.email))
+    try{
+      let userData = jwtDecode(token).data
+      setAuthorizationToken(typeof userData)
+      console.log(userData);
+      if(!isEmpty(userData))
+         return dispatch(successLogin(userData.name,userData.email))
+       return dispatch(failureLogin(userData.data.message))
+    }
+    catch(err){
+      return dispatch(failureLogin(err.message))
+    }
 
-    return dispatch(failureLogin(response.data.message))
+
   }
 
 const successLogin = (name,email) => ({

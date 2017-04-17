@@ -40,8 +40,6 @@ class Header extends React.Component {
                                       <li onClick = {this.props.reqLogOut}>Logout</li>
                                       :
                                       <li onClick ={this.props.toggleModal}>Login</li>}
-
-                                    <li><i className="fa fa-search" aria-hidden="true"></i></li>
                                     {
                                       (this.props.router.getCurrentLocation().pathname =='/new')?
                                       <li onClick = {this.publish} className = 'publish'>

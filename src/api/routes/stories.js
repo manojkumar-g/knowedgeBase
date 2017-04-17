@@ -1,8 +1,9 @@
 const express = require('express')
 const router = new express.Router()
 import Story from './../db/models/Story';
+import authenticate from '../middlewares/auth'
 
-router.post('/publish',(req,res)=>{
+router.post('/publish',authenticate,(req,res)=>{
   let data = {
     ...req.body,
     title:req.body.data[0].data,
@@ -51,7 +52,7 @@ router.get("/getstory/:storyid",function (req,res) {
       });
 });
 
-router.put("/updatecomments/:id",function (req,res) {
+router.put("/updatecomments/:id",authenticate,function (req,res) {
   var id = req.params.id;
   Story.findByIdAndUpdate(
     id,
@@ -64,7 +65,7 @@ router.put("/updatecomments/:id",function (req,res) {
     })
 })
 
-router.put("/liked",function (req,res) {
+router.put("/liked",authenticate,function (req,res) {
   var id = req.body.id;
   Story.findByIdAndUpdate(
     id,
@@ -77,7 +78,7 @@ router.put("/liked",function (req,res) {
     })
 })
 
-router.put("/disliked",function (req,res) {
+router.put("/disliked",authenticate,function (req,res) {
   Story.update( {_id: req.body.id}, { $pull: { likedBy: req.body.email }
       }, function(err, model){
         if(err)

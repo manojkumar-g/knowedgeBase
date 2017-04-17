@@ -15,6 +15,7 @@ const store = createStore(
 );
 
 let token = localStorage.getItem('token')
+
 if(token){
   store.dispatch(setFromToken(token))
 }
