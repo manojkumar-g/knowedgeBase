@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link,browserHistory} from 'react-router'
+import {Link,browserHistory,withRouter} from 'react-router'
 import { connect } from 'react-redux'
 import * as Actions from '../actions/auth'
 import Modal from '../components/loginModal.jsx'
@@ -17,10 +17,14 @@ class Header extends React.Component {
     }
   }
   publish =() =>{
-    this.props.publishArticle()
+    if(this.props.isLoggedIn){
+        this.props.publishArticle()
+    }
+
   }
   render(){
     let path = browserHistory.getCurrentLocation().pathname
+    console.log(this.props.router.getCurrentLocation().pathname);
     return(
       <section className = 'container'>
                                 <Modal
@@ -41,7 +45,7 @@ class Header extends React.Component {
 
                                     <li><i className="fa fa-search" aria-hidden="true"></i></li>
                                     {
-                                      (path ==='/new'&& this.props.isLoggedIn)?
+                                      (this.props.router.getCurrentLocation().pathname =='/new')?
                                       <li onClick = {this.publish} className = 'publish'>
                                         <i className="fa fa-pencil-square-o " aria-hidden="true"></i><span>Publish</span>
                                       </li> :
@@ -58,7 +62,7 @@ class Header extends React.Component {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   ({userData}) => ({...userData}),
   {...Actions,publishArticle}
-)(Header)
+)(Header))
