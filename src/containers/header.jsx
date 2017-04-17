@@ -23,8 +23,6 @@ class Header extends React.Component {
 
   }
   render(){
-    let path = browserHistory.getCurrentLocation().pathname
-    console.log(this.props.router.getCurrentLocation().pathname);
     return(
       <section className = 'container'>
                                 <Modal
