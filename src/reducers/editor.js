@@ -79,6 +79,7 @@ const reducer = (state = initialState,action) =>{
     case 'SUCCESS_PUBLISH':
       return{
         ...initialState,
+        requestPublish:false,
         successPublish:true
       }
     case 'FAILURE_PUBLISH':

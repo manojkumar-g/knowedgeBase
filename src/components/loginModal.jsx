@@ -64,8 +64,17 @@ export default class Modal extends React.Component {
         padding:'0px'
       }
   const style = {
-  marginLeft:0,
-  marginTop:20
+        marginLeft:0,
+        marginTop:20
+          };
+  const lstyle = {
+      container: {
+        position: 'relative',
+      },
+      refresh: {
+        display: 'inline-block',
+        position: 'relative',
+      },
     };
     return(
       <Dialog
@@ -112,7 +121,7 @@ export default class Modal extends React.Component {
                           top={0}
                           loadingColor="#FF9800"
                           status="loading"
-                          style={style.refresh}
+                          style={lstyle.refresh}
                         /> : ''
                 }
 
@@ -153,7 +162,7 @@ export default class Modal extends React.Component {
                         top={0}
                         loadingColor="#FF9800"
                         status="loading"
-                        style={style.refresh}
+                        style={lstyle.refresh}
                       /> : ''
               }
             </div>

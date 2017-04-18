@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import TextArea from './textArea.jsx'
 import * as actions from '../actions/editor'
 import SelectField from 'material-ui/SelectField'
@@ -15,6 +16,15 @@ class Story extends React.Component {
     this.props.setGenre(value)
   }
   render(){
+    const style = {
+          container: {
+            position: 'relative',
+          },
+          refresh: {
+            display: 'inline-block',
+            position: 'relative',
+          },
+        };
     return(
       <section className = 'writeStory'>
         <article className = 'writer'>
@@ -58,6 +68,14 @@ class Story extends React.Component {
           }
 
         </article>
+        {this.props.requestPublish && <RefreshIndicator
+                      size={50}
+                      left={70}
+                      top={0}
+                      loadingColor="#FF9800"
+                      status="loading"
+                      style={style.refresh}
+                    />}
 
       </section>
     )

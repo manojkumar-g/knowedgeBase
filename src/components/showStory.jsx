@@ -2,11 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import {toggleModal} from '../actions/auth.js'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 class Story extends React.Component{
   constructor(props) {
     super(props)
-    this.state = {post:{data:[],comments:[]},write:false,comment:''}
+    this.state = {post:{data:[],comments:[]},write:false,comment:'',loading:true}
   }
   componentDidMount(){
     if(this.props.params.id.length){
@@ -14,7 +15,7 @@ class Story extends React.Component{
       axios.get(url)
           .then(
             (res) =>
-               this.setState({post:res.data[0]})
+               this.setState({post:res.data[0],loading:false})
           )
     }
 
@@ -66,8 +67,26 @@ class Story extends React.Component{
           )
   }
   render(){
+    const style = {
+  container: {
+    position: 'relative',
+  },
+  refresh: {
+    display: 'inline-block',
+    position: 'relative',
+  },
+};
     return(
       <section className="readPost">
+        {this.state.loading &&
+                  <RefreshIndicator
+                size={50}
+                left={70}
+                top={0}
+                loadingColor="#FF9800"
+                status="loading"
+                style={style.refresh}
+              />}
         <article className = 'writer'>
           <i className="fa fa-user-circle" aria-hidden="true"></i>
           <span> {this.state.post.name}</span>

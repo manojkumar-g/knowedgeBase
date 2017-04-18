@@ -90,15 +90,16 @@ class Gallary extends React.Component {
           )
     return(
       <main className="gallary">
-        {this.state.loading &&  <RefreshIndicator
-                size={50}
-                left={70}
-                top={0}
-                loadingColor="#FF9800"
-                status="loading"
-                style={style.refresh}
-              />}
+
         <section className="tiles">
+          {this.state.loading &&  <RefreshIndicator
+                  size={50}
+                  left={70}
+                  top={0}
+                  loadingColor="#FF9800"
+                  status="loading"
+                  style={style.refresh}
+                />}
           {
             this.state.posts.map(
               post =><span key = {post._id}>{
