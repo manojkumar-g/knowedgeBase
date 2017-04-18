@@ -2,8 +2,8 @@ const reducer = (
                 state = {
                   isLoggedIn: false,
                   messages: '',
-                  requestForRegister: false,
-                  requestForLogin: false,
+                  reqForRegister: false,
+                  reqForLogin: false,
                   firstName: '',
                   email:'',
                   showModal :false
@@ -13,20 +13,20 @@ const reducer = (
     case 'REQUEST_REGISTRATION':
       return {
         ...state,
-        requestForRegister: true }
+        reqForRegister: true }
     case 'REQUEST_LOGIN':
       return {
         ...state,
-        requestForLogin: true }
+        reqForLogin: true }
     case 'SUCCESS_REGISTRATION':
       return {
         ...state,
-        requestForRegister: false,
+        reqForRegister: false,
         messages:action.message }
     case 'SUCCESS_LOGIN':
       return {
         ...state,
-        requestForRegister: false,
+        reqForLogin: false,
         messages:action.message,
         isLoggedIn: true,
         firstName: action.name,
@@ -35,12 +35,12 @@ const reducer = (
     case 'FAILURE_REGISTRATION':
       return {
         ...state,
-        requestForRegister: false,
+        reqForRegister: false,
         messages:  action.message }
     case 'FAILURE_LOGIN':
       return {
         ...state,
-        requestForLogin: false,
+        reqForLogin: false,
         messages:action.message}
     case 'REQUEST_LOGOUT':
       return {

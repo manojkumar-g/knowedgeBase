@@ -4,6 +4,7 @@ import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import indexOf from 'lodash/indexOf'
 import pull from 'lodash/pull'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import findIndex from 'lodash/findIndex'
 import tags from '../utils/genres'
 
@@ -11,6 +12,7 @@ class Gallary extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading:false,
       posts:[],
       tags: tags.map(
         (tag,i) => ({key:tag,isSelected:false})
@@ -18,10 +20,11 @@ class Gallary extends React.Component {
     }
   }
   componentDidMount(){
+    this.setState({loading:true})
     axios.get('/api/allPosts')
         .then(
           (res) =>
-             this.setState({posts:res.data})
+             this.setState({posts:res.data,loading:false})
         ).catch(
           err => console.log(err)
         )
@@ -71,6 +74,15 @@ class Gallary extends React.Component {
     }
   }
   render(){
+    const style = {
+        container: {
+          position: 'relative',
+        },
+        refresh: {
+          display: 'inline-block',
+          position: 'relative',
+        },
+      };
     let tags = this.state.tags.filter(
       ({isSelected}) => isSelected
           ).map(
@@ -78,6 +90,14 @@ class Gallary extends React.Component {
           )
     return(
       <main className="gallary">
+        {this.state.loading &&  <RefreshIndicator
+                size={50}
+                left={70}
+                top={0}
+                loadingColor="#FF9800"
+                status="loading"
+                style={style.refresh}
+              />}
         <section className="tiles">
           {
             this.state.posts.map(

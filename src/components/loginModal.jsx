@@ -4,6 +4,7 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import RefreshIndicator from 'material-ui/RefreshIndicator'
 
 export default class Modal extends React.Component {
   constructor(props) {
@@ -86,6 +87,7 @@ export default class Modal extends React.Component {
             onChangeIndex={this.handleChange}
           >
             <div style = {{margin:'50px'}}>
+
               <h3 style ={{color:'red'}}>{this.props.message}</h3>
               <TextField
                   hintText="Email"
@@ -103,6 +105,17 @@ export default class Modal extends React.Component {
                 <RaisedButton label="Login" primary={true} style={style}
                   onTouchTap = {this.login}
                 />
+                {
+                  this.props.reqForLogin ?   <RefreshIndicator
+                          size={50}
+                          left={70}
+                          top={0}
+                          loadingColor="#FF9800"
+                          status="loading"
+                          style={style.refresh}
+                        /> : ''
+                }
+
             </div>
             <div style = {{margin:'50px'}}>
               <h3 style ={{color:'red'}}>{this.props.message}</h3>
@@ -133,6 +146,16 @@ export default class Modal extends React.Component {
                 style={style}
                 onTouchTap = {this.signUp}
               />
+              {
+                this.props.reqForRegister ?   <RefreshIndicator
+                        size={50}
+                        left={70}
+                        top={0}
+                        loadingColor="#FF9800"
+                        status="loading"
+                        style={style.refresh}
+                      /> : ''
+              }
             </div>
 
           </SwipeableViews>

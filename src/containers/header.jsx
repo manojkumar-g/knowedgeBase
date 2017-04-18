@@ -34,6 +34,8 @@ class Header extends React.Component {
                                   login = {this.props.requestForLogin}
                                   signUp = {this.props.requestForRegistration}
                                   message = {this.props.messages}
+                                  reqForLogin = {this.props.reqForLogin}
+                                  reqForRegister = {this.props.reqForRegister}
                                 />
                                 <article className = 'title'>
                                   <Link to = '/'><h1>KnowledgeBase</h1></Link>
