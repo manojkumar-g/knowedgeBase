@@ -5,11 +5,13 @@ import SwipeableViews from 'react-swipeable-views'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
+import isEmail from 'validator/lib/isEmail'
 
 export default class Modal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      msg:'',
       slideIndex: 0,
       login:{
         email:'',
@@ -53,7 +55,25 @@ export default class Modal extends React.Component {
     this.props.login(this.state.login)
   }
   signUp = () => {
-    this.props.signUp(this.state.signUp)
+    let{signUp:{firstName,lastName,email,password}} = this.state;
+    if(firstName.length ===0 ||
+       lastName.length ===0 ||
+       email.length ===0 ||
+       password.length ===0
+     ){
+         this.setState({msg:'all fields are required'})
+       return
+     }
+    else{
+      if(!isEmail(email)){
+          this.setState({msg:'Must be valid Email'})
+          return
+      }
+      this.setState({msg:''})
+      this.props.signUp(this.state.signUp)
+    }
+
+
   }
   render(){
     const customContentStyle = {
@@ -127,6 +147,7 @@ export default class Modal extends React.Component {
 
             </div>
             <div style = {{margin:'50px'}}>
+              <h3 style ={{color:'red'}}>{this.state.msg}</h3>
               <h3 style ={{color:'red'}}>{this.props.message}</h3>
               <TextField
                   floatingLabelText="First Name"
