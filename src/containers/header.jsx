@@ -20,6 +20,9 @@ class Header extends React.Component {
     if(this.props.isLoggedIn){
         this.props.publishArticle()
     }
+    else{
+      browserHistory.push('/')
+    }
 
   }
   render(){
@@ -30,6 +33,7 @@ class Header extends React.Component {
                                   show = {this.props.showModal}
                                   login = {this.props.requestForLogin}
                                   signUp = {this.props.requestForRegistration}
+                                  message = {this.props.messages}
                                 />
                                 <article className = 'title'>
                                   <Link to = '/'><h1>KnowledgeBase</h1></Link>
@@ -49,7 +53,6 @@ class Header extends React.Component {
                                         <i className="fa fa-pencil-square-o" aria-hidden="true"></i><span>Write a story</span>
                                       </li>
                                     }
-
 
                                   </ul>
                                 </article>

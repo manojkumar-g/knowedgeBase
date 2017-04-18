@@ -1,6 +1,6 @@
 const config =
             {
-              "dbUri": "mongodb://localhost/react-app",
+              "dbUri": "mongodb://manoj:deadpool@ds149030.mlab.com:49030/reactapp",
               "jwtSecret": "I am Batman",
               facebook: {
                 clientID: '1835756630082638',

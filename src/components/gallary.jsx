@@ -76,7 +76,6 @@ class Gallary extends React.Component {
           ).map(
             ({key}) =>key
           )
-    console.log(tags.length);
     return(
       <main className="gallary">
         <section className="tiles">
@@ -99,6 +98,10 @@ class Gallary extends React.Component {
                             <div className="showoff" onClick = {() => {this.read(post._id)}}>
                               <span className ='titl'>{post.title}</span>
                               <span className="info">{post.data[1].data.substr(0,50)+' ...'}</span>
+                              <div className ='descposter'>
+                                <img src={post.poster} alt=""/>
+                              </div>
+
                             </div>
                             <div className="footer">
                               <div className="like">
@@ -136,6 +139,9 @@ class Gallary extends React.Component {
                                   <div className="showoff" onClick = {() => {this.read(post._id)}}>
                                     <span className ='titl'>{post.title}</span>
                                     <span className="info">{post.data[1].data.substr(0,50)+' ...'}</span>
+                                    <div className ='descposter'>
+                                      <img src={post.poster} alt=""/>
+                                    </div>
                                   </div>
                                   <div className="footer">
                                     <div className="like">

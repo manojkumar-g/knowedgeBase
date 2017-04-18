@@ -9,8 +9,7 @@ export const requestForRegistration = (data) =>
         dispatch(reqRegistration())
         return axios.post('/signup',data)
              .then(response => {
-               dispatch(toggleModal())
-               response.status === 200 ? dispatch(successRegistration()) : dispatch(failureRegistration())
+               response.status === 200 ? dispatch(successRegistration(response.data.message)) : dispatch(failureRegistration())
              })
              .catch(
                ({response:{data}}) => {
@@ -19,8 +18,9 @@ export const requestForRegistration = (data) =>
              )
     }
 
-const successRegistration = () => ({
-    type : 'SUCCESS_REGISTRATION'
+const successRegistration = (message) => ({
+    type : 'SUCCESS_REGISTRATION',
+    message
 });
 const reqRegistration = () => ({
     type : 'REQUEST_REGISTRATION'
@@ -51,7 +51,7 @@ export const setFromToken = (token) =>
   dispatch => {
     try{
       let userData = jwtDecode(token).data
-      setAuthorizationToken(typeof userData)
+      setAuthorizationToken(userData)
       console.log(userData);
       if(!isEmpty(userData))
          return dispatch(successLogin(userData.name,userData.email))

@@ -9,6 +9,7 @@ const initialState = {
   ],
   focused:0,
   genre:'EDUCATION',
+  poster:'http://bunkiechamber.net/sites/default/files/Education.jpg',
   requestPublish: false,
   successPublish:false
 }
@@ -64,6 +65,11 @@ const reducer = (state = initialState,action) =>{
       return{
         ...state,
         genre:action.genre
+      }
+    case 'SET_POSER':
+      return{
+        ...state,
+        poster:action.poster
       }
     case 'REQUEST_PUBLISH':
       return{

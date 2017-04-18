@@ -39,6 +39,7 @@ export const publishArticle = () =>
           genre : state.editorData.genre,
           author:state.userData.email,
           name:state.userData.firstName,
+          poster:state.editorData.poster,
           time:moment().format()
         }
     ).then(response => {
@@ -65,4 +66,8 @@ export const publishArticle = () =>
 export const setGenre = (genre) => ({
   type:'SET_GENRE',
   genre
+})
+export const setPoster = (poster) => ({
+  type:'SET_POSER',
+  poster
 })

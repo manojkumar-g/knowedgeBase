@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import TextField from 'material-ui/TextField'
 import TextArea from './textArea.jsx'
 import * as actions from '../actions/editor'
 import SelectField from 'material-ui/SelectField'
@@ -31,7 +32,13 @@ class Story extends React.Component {
                       genre => <MenuItem value={genre} primaryText={genre} key ={genre} />
                     )
                   }
-                </SelectField>
+                </SelectField><br/>
+                <TextField
+                    floatingLabelText="poster"
+                    value = {this.props.poster}
+                    fullWidth={true}
+                    onChange = {(e) => {this.props.setPoster(e.target.value)}}
+                  />
         </article>
         <article className="story">
           {

@@ -18,8 +18,7 @@ export default class Modal extends React.Component {
         firstName:'',
         lastName:'',
         email:'',
-        password:'',
-        confirmPassword:''
+        password:''
       }
     }
   }
@@ -54,8 +53,6 @@ export default class Modal extends React.Component {
   }
   signUp = () => {
     this.props.signUp(this.state.signUp)
-    if(this.props.isLoggedIn)
-      this.setState({slideIndex:0})
   }
   render(){
     const customContentStyle = {
@@ -89,6 +86,7 @@ export default class Modal extends React.Component {
             onChangeIndex={this.handleChange}
           >
             <div style = {{margin:'50px'}}>
+              <h3 style ={{color:'red'}}>{this.props.message}</h3>
               <TextField
                   hintText="Email"
                   floatingLabelText="Email"
@@ -107,6 +105,7 @@ export default class Modal extends React.Component {
                 />
             </div>
             <div style = {{margin:'50px'}}>
+              <h3 style ={{color:'red'}}>{this.props.message}</h3>
               <TextField
                   floatingLabelText="First Name"
                   value = {this.state.signUp.firstName}
@@ -128,12 +127,7 @@ export default class Modal extends React.Component {
                 onChange = {(e) => {this.onChange('password',e)}}
                 type="password"
               /><br />
-              <TextField
-                floatingLabelText="Confirm Password"
-                type="password"
-                value = {this.state.signUp.confirmPassword}
-                onChange = {(e) => {this.onChange('confirmPassword',e)}}
-              /><br />
+
               <RaisedButton label="Sign Up"
                 secondary={true}
                 style={style}

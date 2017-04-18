@@ -6,6 +6,7 @@ var Story = mongoose.Schema({
   data:Array,
   title:String,
   genre   : String,
+  poster  : String,
   name    : String,
   author  : String,
   comments: Array,
